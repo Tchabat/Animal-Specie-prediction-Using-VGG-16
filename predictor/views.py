@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 # predictor/views.py
 from django.shortcuts import render
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
+from tensorflow.keras.models import load_model # type: ignore
+from tensorflow.keras.preprocessing import image # type: ignore
 import numpy as np
 import os
 
@@ -31,5 +31,8 @@ def predict_image(request):
         prediction = CLASS_NAMES[np.argmax(pred)]
         img_url = '/' + img_path
 
-    return render(request, 'index.html', {'prediction': prediction, 'image_url': img_url})
+    return render(request, 'predictor/index.html', {'prediction': prediction, 'image_url': img_url})
+
+from django.template.loader import get_template
+from django.http import HttpResponse
 

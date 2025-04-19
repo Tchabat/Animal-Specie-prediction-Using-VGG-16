@@ -31,11 +31,14 @@ ALLOWED_HOSTS = []
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+# Removed incomplete TEMPLATES definition
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'predictor',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
