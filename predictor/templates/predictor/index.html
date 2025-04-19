@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Classifier</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            max-width: 500px;
+            text-align: center;
+            color: #333;
+            overflow: hidden;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .big-heading {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+        }
+
+        .file-name {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #555;
+            font-style: italic;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .prediction {
+            margin-top: 20px;
+        }
+
+        .prediction h2 {
+            color: #28a745;
+        }
+
+        .prediction img {
+            margin-top: 10px;
+            border-radius: 10px;
+            max-width: 100%;
+            max-height: 300px; /* Prevents the image from dragging the div */
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="big-heading">Animal Species Classifier</div>
+        <div class="container">
+            <h1>Upload an Animal Image</h1>
+            <h2>Let AI predict the species for you!</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="file-upload" class="custom-file-upload">
+                    Choose File
+                </label>
+                <input id="file-upload" type="file" name="image" required onchange="displayFileName()">
+                <div id="file-name" class="file-name">No file chosen</div>
+                <button type="submit">Predict</button>
+            </form>
+
+            {% if prediction %}
+            <div class="prediction">
+                <h2>Prediction: {{ prediction }}</h2>
+                <img src="{{ image_url }}" alt="Uploaded Image">
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function displayFileName() {
+            const fileInput = document.getElementById('file-upload');
+            const fileNameDisplay = document.getElementById('file-name');
+            fileNameDisplay.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
+        }
+    </script>
+</body>
+</html>
