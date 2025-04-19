@@ -35,7 +35,7 @@ This project implements an animal species prediction system capable of identifyi
 - Used ImageDataGenerator for augmentation and preprocessing
 - Saved trained model as `animal_classifier.h5`
 - This file being 96mb was unable to be pushed to this git repository
-- Trained a new model with lesser material carrying the same name 
+- Trained a new model with lesser material (So lesser animals identification) carrying the same name `animal_classifier.h5` with a size permitting git push
 
 ### Web Integration
 - Developed using Django framework
